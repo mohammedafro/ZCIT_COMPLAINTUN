@@ -1,0 +1,5 @@
+CLASS zbp_cit_i_complaint_68 DEFINITION PUBLIC ABSTRACT FINAL FOR BEHAVIOR OF zcit_i_complaint_68.
+ENDCLASS.
+
+CLASS zbp_cit_i_complaint_68 IMPLEMENTATION.
+ENDCLASS.

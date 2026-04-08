@@ -1,0 +1,4 @@
+@EndUserText.label: 'Service Definition for Complaints'
+define service ZCIT_SD_COMPLAINT_68 {
+  expose ZCIT_C_COMPLAINT_68 as Complaint;
+}

@@ -1,0 +1,36 @@
+unmanaged implementation in class zbp_cit_i_complaint_68 unique;
+strict ( 2 );
+
+define behavior for ZCIT_I_COMPLAINT_68 alias Complaint
+lock master
+authorization master ( instance )
+{
+  create;
+  update;
+  delete;
+
+  /* Make ID mandatory when creating a new complaint */
+  field ( mandatory : create ) ComplaintId;
+  field ( readonly ) CreatedAt, CreatedBy, LastChangedAt, LastChangedBy, LocalLastChangedAt;
+
+  /* PREMIUM FEATURE: Our Custom Action Button */
+  action resolveComplaint result [1] $self;
+
+  /* Maps the CDS view field names back to the physical database table fields */
+  mapping for zcit_complaint
+  {
+    ComplaintId          = complaint_id;
+    CustomerName         = customer_name;
+    CustomerEmail        = customer_email;
+    Category             = category;
+    Priority             = priority;
+    Status               = status;
+    ComplaintDescription = complaint_description;
+    ResolutionProgress   = resolution_progress;
+    CreatedBy            = created_by;
+    CreatedAt            = created_at;
+    LastChangedBy        = last_changed_by;
+    LastChangedAt        = last_changed_at;
+    LocalLastChangedAt   = local_last_changed_at;
+  }
+}

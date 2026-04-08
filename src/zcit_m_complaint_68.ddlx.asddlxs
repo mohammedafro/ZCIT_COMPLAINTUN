@@ -1,0 +1,66 @@
+@Metadata.layer: #CORE
+
+/* Defines the Header of the Object Page */
+@UI: {
+  headerInfo: { typeName: 'Complaint',
+                typeNamePlural: 'Customer Complaints',
+                title: { type: #STANDARD, value: 'ComplaintId' },
+                description: { type: #STANDARD, value: 'CustomerName' } } }
+                
+annotate view ZCIT_C_COMPLAINT_68 with
+{
+  /* Creates the main 'Details' box on the Object Page */
+  @UI.facet: [
+    { id: 'ComplaintInfo',
+      purpose: #STANDARD,
+      type: #IDENTIFICATION_REFERENCE,
+      label: 'Complaint Details',
+      position: 10 }
+  ]
+
+  @UI: { lineItem:       [ { position: 10, importance: #HIGH } ],
+         identification: [ { position: 10 } ] }
+  ComplaintId;
+
+  @UI: { lineItem:       [ { position: 20, importance: #HIGH } ],
+         identification: [ { position: 20 } ] }
+  CustomerName;
+
+  @UI: { lineItem:       [ { position: 30 } ],
+         identification: [ { position: 30 } ] }
+  CustomerEmail;
+
+  @UI: { lineItem:       [ { position: 40 } ],
+         identification: [ { position: 40 } ] }
+  Category;
+
+  /* PREMIUM FEATURE 1: Priority with Colors */
+  @UI: { lineItem:       [ { position: 50, criticality: 'PriorityCriticality' } ],
+         identification: [ { position: 50, criticality: 'PriorityCriticality' } ] }
+  Priority;
+
+  /* PREMIUM FEATURE 2 & 3: Status Colors & 'Resolve Issue' Action Button */
+  @UI: { lineItem:       [ { position: 60, criticality: 'StatusCriticality' },
+                           { type: #FOR_ACTION, dataAction: 'resolveComplaint', label: 'Resolve Issue', position: 10 } ],
+         identification: [ { position: 60, criticality: 'StatusCriticality' },
+                           { type: #FOR_ACTION, dataAction: 'resolveComplaint', label: 'Resolve Issue', position: 10 } ] }
+  Status;
+
+  /* PREMIUM FEATURE 4: Visual Progress Bar (Target value is 100%) */
+  @UI: { lineItem:       [ { position: 70, type: #AS_DATAPOINT } ],
+         identification: [ { position: 70, type: #AS_DATAPOINT } ],
+         dataPoint:      { visualization: #PROGRESS, targetValue: 100 } }
+  ResolutionProgress;
+
+  /* Formats the description as a large text box instead of a single line */
+  @UI: { identification: [ { position: 80 } ],
+         multiLineText: true }
+  ComplaintDescription;
+
+  /* Hide the raw number logic from the user */
+  @UI.hidden: true
+  PriorityCriticality;
+
+  @UI.hidden: true
+  StatusCriticality;
+}
